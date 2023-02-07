@@ -8,10 +8,11 @@ class Filtering:
         self.origBuffer   = in_buffer
         if self.origBuffer is not None:
             self.origImage = self.origBuffer.read()
+            self.outImage     = self.get_cv2_image()
         else:
             self.origImage = None
+            self.outImage  = None
         self.origChannels = in_channels
-        self.outImage     = self.get_cv2_image()
         self.outChannels  = ""
         self.kernel_size  = None
 
@@ -91,7 +92,6 @@ class Filtering:
             self.outImage = cv2.filter2D(self.get_cv2_image(),
                                          ddepth = -1,
                                          kernel = in_kernel.get_kernel())
-            self.outImage = cv2.cvtColor(self.outImage, cv2.COLOR_RGB2BGR)
 
     def sobel(self, in_kernel):
         self.outChannels = "GRAY"
