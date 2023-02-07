@@ -49,13 +49,13 @@ if filter_applier.get_buffer() is not None:
 
     if (filter_applier.get_filtered())[1] == "BGR":
         columns[1].image(filter_applier.get_filtered()[0], channels = "BGR")
+        dl_image = Image.fromarray(filter_applier.get_filtered()[0][:, :, ::-1])
     else:
         columns[1].image(filter_applier.get_filtered()[0])
-    columns[1].text("Filtered Image")
+        dl_image = Image.fromarray(filter_applier.get_filtered()[0][:, :])
 
-    dl_image = Image.fromarray(filter_applier.get_filtered()[0][:, :, ::-1])
+    columns[1].text("Filtered Image")
     st.markdown(get_image_download_link(dl_image,
                                         "My_filtered_image.jpg",
                                         'Download Output Image'),
                 unsafe_allow_html = True)
-
